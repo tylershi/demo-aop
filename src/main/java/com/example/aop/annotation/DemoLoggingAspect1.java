@@ -20,9 +20,9 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-public class DemoLoggingAspect {
+public class DemoLoggingAspect1 {
 
-  @Pointcut("@annotation(com.example.aop.annotation.Demo)")
+  @Pointcut("bean(helloServiceImpl)")
   public void pointCut() {
   }
 
