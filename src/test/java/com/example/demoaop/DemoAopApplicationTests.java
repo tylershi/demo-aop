@@ -17,13 +17,18 @@ public class DemoAopApplicationTests {
 
 
   @Test
-  public void contextLoads() {
-    helloService.sayHello("hello world");
+  public void testSayHelloByAdmin() {
+    helloService.sayHelloByAdmin("hello world");
   }
 
-  @Test(expected = Exception.class)
-  public void testSayHelloThenException() {
-    helloService.sayHelloThenException("hello world");
+  @Test
+  public void testSayHelloWithoutPermission() {
+    helloService.sayHelloWithoutPermission("hello world");
+  }
+
+  @Test
+  public void testSayHelloWithMorePermission(){
+    helloService.sayHelloWithMorePermission("hello world");
   }
 
 }

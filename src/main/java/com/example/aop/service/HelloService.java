@@ -8,8 +8,10 @@ package com.example.aop.service;
  */
 public interface HelloService {
 
-  void sayHello(String msg);
+  void sayHelloByAdmin(String msg);
 
-  void sayHelloThenException(String msg);
+  void sayHelloWithoutPermission(String msg);
+
+  void sayHelloWithMorePermission(String msg);
 
 }

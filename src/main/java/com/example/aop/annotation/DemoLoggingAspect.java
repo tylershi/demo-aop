@@ -12,6 +12,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 /**
  * @Author tyler.shi
@@ -29,14 +30,9 @@ public class DemoLoggingAspect {
 
   @Before("@annotation(demo)")
   public void beforeMethod(Demo demo) {
+    // 接口访问需要的权限
     ArrayList<String> list = Lists.newArrayList(demo.value());
-    if (list.containsAll(getUserPermission())) {
-      // if true then do next
-      System.out.println("param valid success");
-    } else {
-      // if false mean permission validate failed, you can throw exception
-      System.out.println("param valid failed");
-    }
+    validateUserPermission(list);
     System.out.println("method start time " + System.currentTimeMillis());
   }
 
@@ -65,6 +61,21 @@ public class DemoLoggingAspect {
     System.out.println("result ->" + result);
     System.out.println("事务结束 time ->" + System.currentTimeMillis());
     return result;
+  }
+
+  void validateUserPermission(List<String> permissions) {
+    // 不需要权限直接放行
+    if (CollectionUtils.isEmpty(permissions)) {
+      System.out.println("不需要权限，直接放行");
+      return;
+    }
+    // 获取用户权限
+    List<String> userPermissions = getUserPermission();
+    // 校验权限
+    if (!userPermissions.containsAll(permissions)) {
+      throw new RuntimeException("没有权限，禁止访问");
+    }
+
   }
 
   private List<String> getUserPermission() {

@@ -15,14 +15,19 @@ public class HelloServiceImpl implements HelloService {
 
   @Demo("ROLE_ADMIN")
   @Override
-  public void sayHello(String msg) {
+  public void sayHelloByAdmin(String msg) {
     System.out.println(msg);
   }
 
   @Demo
   @Override
-  public void sayHelloThenException(String msg) {
+  public void sayHelloWithoutPermission(String msg) {
     System.out.println(msg);
-    throw new RuntimeException();
+  }
+
+  @Demo(value = {"ROLE_ADMIN", "ROLE_TEST"})
+  @Override
+  public void sayHelloWithMorePermission(String msg) {
+    System.out.println(msg);
   }
 }
