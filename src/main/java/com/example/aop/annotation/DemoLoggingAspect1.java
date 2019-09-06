@@ -2,6 +2,7 @@ package com.example.aop.annotation;
 
 import com.google.common.collect.Lists;
 import java.util.ArrayList;
+import java.util.List;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -28,9 +29,8 @@ public class DemoLoggingAspect1 {
 
   @Before("@annotation(demo)")
   public void beforeMethod(Demo demo) {
-    String require = "demo";
     ArrayList<String> list = Lists.newArrayList(demo.value());
-    if (list.contains(require)) {
+    if (list.containsAll(getUserPermission())) {
       System.out.println("param valid success");
     } else {
       System.out.println("param valid failed");
@@ -65,5 +65,9 @@ public class DemoLoggingAspect1 {
     return result;
   }
 
+
+  private List<String> getUserPermission() {
+    return Lists.newArrayList("ROLE_ADMIN");
+  }
 
 }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class HelloServiceImpl implements HelloService {
 
-  @Demo("demo")
+  @Demo("ROLE_ADMIN")
   @Override
   public void sayHello(String msg) {
     System.out.println(msg);
