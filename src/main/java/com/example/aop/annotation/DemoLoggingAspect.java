@@ -68,6 +68,7 @@ public class DemoLoggingAspect {
   }
 
   private List<String> getUserPermission() {
+    System.out.println("获取用户权限");
     return Lists.newArrayList("ROLE_ADMIN");
   }
 
